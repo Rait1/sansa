@@ -6,11 +6,11 @@
 require SYSPATH . 'classes/Kohana/Core' . EXT;
 
 if (is_file(APPPATH . 'classes/Kohana' . EXT)) {
-    // Application extends the core
-    require APPPATH . 'classes/Kohana' . EXT;
+	// Application extends the core
+	require APPPATH . 'classes/Kohana' . EXT;
 } else {
-    // Load empty core extension
-    require SYSPATH . 'classes/Kohana' . EXT;
+	// Load empty core extension
+	require SYSPATH . 'classes/Kohana' . EXT;
 }
 
 /**
@@ -60,6 +60,10 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  */
 I18n::lang('en-us');
 
+/*
+*Valid salt for cookie
+ */
+Cookie::$salt = 'jC6E4HdzsSPhPtY3ThjmbVpvqZkxOeI0';
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
  *
@@ -67,7 +71,7 @@ I18n::lang('en-us');
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 if (isset($_SERVER['KOHANA_ENV'])) {
-    Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
+	Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 }
 
 /**
@@ -86,7 +90,7 @@ if (isset($_SERVER['KOHANA_ENV'])) {
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-    'base_url' => '/sansa/',
+	'base_url' => '/sansa/',
 ));
 
 /**
@@ -103,16 +107,19 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-    // 'auth'       => MODPATH.'auth',       // Basic authentication
-    // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-    // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-    // 'database'   => MODPATH.'database',   // Database access
-    // 'image'      => MODPATH.'image',      // Image manipulation
-    // 'minion'     => MODPATH.'minion',     // CLI Tasks
-    // 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-    // 'unittest'   => MODPATH.'unittest',   // Unit testing
-    // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-    'commoneer' => MODPATH . 'commoneer'
+	// 'auth'       => MODPATH.'auth',       // Basic authentication
+	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+	'database' => MODPATH . 'database', // Database access
+	// 'image'      => MODPATH.'image',      // Image manipulation
+	// 'minion'     => MODPATH.'minion',     // CLI Tasks
+	'orm' => MODPATH . 'orm', // Object Relationship Mapping
+	// 'unittest'   => MODPATH.'unittest',   // Unit testing
+	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'commoneer' => MODPATH . 'commoneer',
+	'notify' => MODPATH . 'notify'
+
+
 ));
 
 /**
@@ -120,7 +127,7 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
-    ->defaults(array(
-    'controller' => 'dashboard',
-    'action' => 'index',
+	->defaults(array(
+	'controller' => 'dashboard',
+	'action' => 'index',
 ));
